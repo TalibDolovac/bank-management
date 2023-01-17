@@ -21,6 +21,7 @@ void login();
 bool checkCredentials(string email, string password);
 bool validateEmail(string email);
 void withdrawMoney(string email, string password);
+void transactionMoney();
 
 int main() {
   cout << "Welcome to the bank management system." << endl;
@@ -119,15 +120,19 @@ void login() {
 	cout << "Successful login." << endl;
 	
 	cout << "1. Withdraw Money." << endl;
-	cout << "2. Exit." << endl;
-	cout << "?:";
+  cout << "2. Transaction Money" << endl;
+	cout << "3. Exit." << endl;
+	cout << "?:" << endl;
 	cin >> izbor;
 	
 	switch(izbor) {
 		case 1:
 			withdrawMoney(email, password);
 			break;
-		case 2:
+    case 2: 
+      transactionMoney();
+      break;
+		case 3:
 			exit(2);
 			break;
 	}
@@ -227,7 +232,7 @@ void withdrawMoney(string email, string password) {
           }
 
           if (fields[1] == email && fields[2] == password) {
-            outfile << fields[0] << "," << fields[1] << "," << fields[2] << "," << balance << endl;
+            outfile << endl << fields[0] << "," << fields[1] << "," << fields[2] << "," << balance << endl;
           } else {
             outfile << line << endl;
           }
@@ -244,4 +249,38 @@ void withdrawMoney(string email, string password) {
   
   infile.close();
   cout << "Error: User not found." << endl;
+}
+
+void transactionMoney() {
+  int transcMoney;
+  string username;
+  bool isUsername = false;
+  
+  ifstream infile;
+  infile.open("users.txt");
+
+  string line;
+  
+  while (getline(infile, line)) {
+  
+		string fields[4];  
+    int i = 0;
+    string field;
+    stringstream ss(line);
+    while (getline(ss, field, ',')) {
+      fields[i] = field;
+      i++;
+    }
+    
+    if(fields[0] == username) {
+    	isUsername = true;
+		}
+  }
+		cout << "Enter the username of the person: ";
+	  cin >> username;
+	
+	  if(isUsername) {
+	    cout << "How much $:";
+			cin >> transcMoney;
+	  }
 }
