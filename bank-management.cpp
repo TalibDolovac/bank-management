@@ -22,7 +22,7 @@ void login();
 bool checkCredentials(string email, string password);
 bool validateEmail(string email);
 void withdrawMoney(string email, string password);
-void transactionMoney(string email, string password);
+//void transactionMoney(string email, string password); uskoro 
 void checkBalance(string email, string password);
 void displayAccounts();
 void closeAccount(string email, string password);
@@ -127,36 +127,32 @@ void login() {
 	cout << "Successful login." << endl;
 	
 	cout << "1. Withdraw Money." << endl;
-  cout << "2. Transaction Money." << endl;
-  cout << "3. Check Balance." << endl;
-  cout << "4. Modify Account." << endl;
-  cout << "5. Display Accounts." << endl;
-  cout << "6. Close Account." << endl;
-	cout << "7. Exit." << endl;
-	cout << "Enter your choice: (1-7): ";
+  cout << "2. Check Balance." << endl;
+  cout << "3. Modify Account." << endl;
+  cout << "4. Display Accounts." << endl;
+  cout << "5. Close Account." << endl;
+	cout << "6. Exit." << endl;
+	cout << "Enter your choice: (1-6): ";
 	cin >> izbor;
 	
 	switch(izbor) {
 		case 1:
 			withdrawMoney(email, password);
 			break;
-    case 2: 
-      transactionMoney(email, password);
-      break;
-    case 3:
+    case 2:
 			checkBalance(email, password);
 			break;
-		case 4:
+		case 3:
 			modifyAccount(email, password);
 			break;
-		case 5:
+		case 4:
 			displayAccounts();
 			break;
-		case 6:
+		case 5:
 			closeAccount(email, password);
 			break;
-		case 7:
-			exit(7);
+		case 6:
+			exit(6);
 			break;
 		default:
       cout << "Invalid choice." << endl;
@@ -294,6 +290,21 @@ void withdrawMoney(string email, string password) {
     } else {
         cout << "Error: User not found." << endl;
     }
+}
+
+void transactionMoney(string email, string password) {
+  string email_to;
+  while(true) {
+    cout << "Enter email of person you want to transfer money: ";
+    cin >> email_to;
+    if(validateEmail(email_to)) {
+      break;
+    } else {
+      cout << "Try again.";
+    }
+  }
+  	
+  
 }
 
 void checkBalance(string email, string password) {
@@ -482,4 +493,4 @@ void modifyAccount(string email, string password) {
 	outfile.close();
 	
 	cout << "Account successfully modified." << endl;
-}
+}	
